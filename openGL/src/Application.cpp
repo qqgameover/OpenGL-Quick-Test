@@ -1,3 +1,4 @@
+#include <iostream>
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 
@@ -20,16 +21,24 @@ int main(void)
     /* Make the window's context current */
     glfwMakeContextCurrent(window);
 
+    if(glewInit() != GLEW_OK)
+    {
+        std::cout << "Error";
+    }
+
+    std::cout << glGetString(GL_VERSION) << std::endl;
     /* Loop until the user closes the window */
     while (!glfwWindowShouldClose(window))
     {
         /* Render here */
         glClear(GL_COLOR_BUFFER_BIT);
 
-        glBegin(GL_TRIANGLES);
-        glVertex2f(-0.5f, -0.5f);
-        glVertex2f(0.0f, 0.5f);
-        glVertex2f(0.5f, -0.5f);
+        glBegin(GL_QUADS);
+        glVertex2f(-0.25f, 0.25f); // top left
+        glVertex2f(0.25f, 0.25f); // top right 
+        glVertex2f(0.25f, -0.25f); // bottom right
+        glVertex2f(-0.25f, -0.25f); // bottom left
+        //glOrtho(0.0, 10.0, 0.0, 10.0, -1.0, 1.0);
         glEnd();
 
         /* Swap front and back buffers */
