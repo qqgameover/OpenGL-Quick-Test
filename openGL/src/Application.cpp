@@ -1,7 +1,7 @@
 #include <iostream>
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
-
+#include "game.h"
 int main(void)
 {
     GLFWwindow* window;
@@ -45,7 +45,7 @@ int main(void)
         /* Poll for and process events */
         glfwPollEvents();
     }
-
+    game game;
     glfwTerminate();
     return 0;
 }
