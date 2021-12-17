@@ -11,7 +11,7 @@ int main(void)
         return -1;
 
     /* Create a windowed mode window and its OpenGL context */
-    window = glfwCreateWindow(640, 480, "Welcome to the spaghetti-land", NULL, NULL);
+    window = glfwCreateWindow(1024, 1024, "Welcome to the spaghetti-land", NULL, NULL);
     if (!window)
     {
         glfwTerminate();
@@ -32,18 +32,16 @@ int main(void)
     {
         /* Render here */
         glClear(GL_COLOR_BUFFER_BIT);
-
         glBegin(GL_QUADS);
+        glColor3f(1.0f, 0.0f, 0.0f);
         glVertex2f(-0.25f, 0.25f); // top left
         glVertex2f(0.25f, 0.25f); // top right 
         glVertex2f(0.25f, -0.25f); // bottom right
         glVertex2f(-0.25f, -0.25f); // bottom left
         //glOrtho(0.0, 10.0, 0.0, 10.0, -1.0, 1.0);
         glEnd();
-
         /* Swap front and back buffers */
         glfwSwapBuffers(window);
-
         /* Poll for and process events */
         glfwPollEvents();
     }
