@@ -86,6 +86,7 @@ void piece::RotateBlock(std::vector
 
 std::vector<std::vector<unsigned char>> piece::GetRandomBlockMatrix()
 {
+    srand(time(0));
     const int num = rand() % 7;
     if (num == 1) return { {2, 2}, {2, 2} };
     if (num == 2) return { {0, 3, 3}, {3, 3, 0} };

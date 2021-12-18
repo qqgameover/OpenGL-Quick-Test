@@ -3,6 +3,7 @@
 #include "board.h"
 #include "position.h"
 #include <memory>
+#include <random>
 
 class piece
 {
