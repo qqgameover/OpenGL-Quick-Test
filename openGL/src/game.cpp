@@ -44,12 +44,14 @@ void game::GameplayLoop(GLFWwindow* window)
 	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	glColor3f(1.0, 0.0, 0.0);
 	int xsize = 0, ysize = 0;
-	for (int j = 0; j < 22; j++)
+	for (int yIndex = 0; yIndex < 23; yIndex++)
 	{
 
 		xsize = 0;
-		for (int i = 0; i < 12; i++)
+		for (int xIndex = 0; xIndex < 12; xIndex++)
 		{
+			if (Board.BoardArray[yIndex][xIndex] == 0) { glPolygonMode(GL_FRONT_AND_BACK, GL_LINE); }
+			if (Board.BoardArray[yIndex][xIndex] > 0) { glPolygonMode(GL_FRONT_AND_BACK, GL_FILL); }
 			glBegin(GL_POLYGON);
 			glVertex3f(-50.0 + xsize, -50.0 + ysize, 0.0);
 			glVertex3f(-40.0 + xsize, -50.0 + ysize, 0.0);
