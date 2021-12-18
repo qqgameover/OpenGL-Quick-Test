@@ -50,6 +50,12 @@ void game::GameplayLoop(GLFWwindow* window)
 		xsize = 0;
 		for (int xIndex = 0; xIndex < 12; xIndex++)
 		{
+			glColor3f(1.0, 1.0, 1.0);
+			if (Board.BoardArray[yIndex][xIndex] == 1) 
+			{
+				glColor3f(1.0, 0.0, 1.0);
+				glPolygonMode(GL_FRONT_AND_BACK, GL_FILL); 
+			}
 			if (Board.BoardArray[yIndex][xIndex] == 0) { glPolygonMode(GL_FRONT_AND_BACK, GL_LINE); }
 			if (Board.BoardArray[yIndex][xIndex] > 0) { glPolygonMode(GL_FRONT_AND_BACK, GL_FILL); }
 			glBegin(GL_POLYGON);
