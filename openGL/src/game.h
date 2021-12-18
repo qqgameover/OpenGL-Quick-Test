@@ -14,7 +14,7 @@ public:
     piece CurrentPiece;
     ColDetection ColDetection;
     game();
-    void PieceLogic();
-    void GameplayLoop(GLFWwindow* window);
+    void PieceLogic(char movement);
+    void GameplayLoop(GLFWwindow* window, char movement);
 };
 

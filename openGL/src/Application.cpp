@@ -3,20 +3,29 @@
 #include <GLFW/glfw3.h>
 #include "game.h"
 
-void DrawGrid(int HALF_GRID_SIZE)
+char GetKeyPress(GLFWwindow* window)
 {
-    glBegin(GL_LINES);
-    glColor3f(0.75f, 0.75f, 0.75f);
-    for (int i = -HALF_GRID_SIZE; i <= HALF_GRID_SIZE; i++)
+    int stateW = glfwGetKey(window, GLFW_KEY_W);
+    if (stateW == GLFW_PRESS)
     {
-        glVertex3f((float)i, 0, (float)-HALF_GRID_SIZE);
-        glVertex3f((float)i, 0, (float)HALF_GRID_SIZE);
-
-        glVertex3f((float)-HALF_GRID_SIZE, 0, (float)i);
-        glVertex3f((float)HALF_GRID_SIZE, 0, (float)i);
+        return 'w';
     }
-    glEnd();
-
+    int stateA = glfwGetKey(window, GLFW_KEY_A);
+    if (stateA == GLFW_PRESS)
+    {
+        return 'a';
+    }
+    int stateS = glfwGetKey(window, GLFW_KEY_S);
+    if (stateS == GLFW_PRESS)
+    {
+        return 's';
+    }
+    int stateD = glfwGetKey(window, GLFW_KEY_D);
+    if (stateD == GLFW_PRESS)
+    {
+        return 'd';
+    }
+    return NULL;
 }
 
 int main(void)
@@ -42,14 +51,14 @@ int main(void)
     {
         std::cout << "Error";
     }
-
     std::cout << glGetString(GL_VERSION) << std::endl;
     /* Loop until the user closes the window */
     glOrtho(-130.0, 150.0, -150.0, 150.0, -1.5, 1.5);
     glScalef(0.7, -0.7, 0);
     while (!glfwWindowShouldClose(window))
     {
-        game.GameplayLoop(window);
+        char keypressed = GetKeyPress(window);
+        game.GameplayLoop(window, keypressed);
     }
     glfwTerminate();
     return 0;

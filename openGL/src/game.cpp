@@ -22,10 +22,10 @@ void set_cursor(bool visible) {
 	SetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE), &info);
 }
 
-void game::PieceLogic()
+void game::PieceLogic(char movement)
 {
 	CurrentPiece.UnDrawBlock(Board);
-	position currentDir = Controls.HandleInput(CurrentPiece, Board.LandedArray);
+	position currentDir = Controls.HandleInput(CurrentPiece, Board.LandedArray, movement);
 	CurrentPiece.MoveBlock(currentDir, Board.LandedArray);
 	bool hasCollided = ColDetection.IsColliding(Board.LandedArray, CurrentPiece, position(1, 0));
 	CurrentPiece.DrawBlock(Board);
@@ -37,7 +37,7 @@ void game::PieceLogic()
 	}
 }
 
-void game::GameplayLoop(GLFWwindow* window)
+void game::GameplayLoop(GLFWwindow* window, char movement)
 {
 	/* Render here */
 	glClear(GL_COLOR_BUFFER_BIT);
@@ -74,7 +74,7 @@ void game::GameplayLoop(GLFWwindow* window)
 	/* Poll for and process events */
 	glfwPollEvents();
 	//setCursorPosition(0, 0);
-	PieceLogic();
+	PieceLogic(movement);
 	//Board.DrawBoard();
 	std::this_thread::sleep_for(std::chrono::milliseconds(WAITTIME));
 }
