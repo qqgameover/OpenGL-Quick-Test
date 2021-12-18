@@ -8,22 +8,22 @@
 char GetKeyPress(GLFWwindow* window)
 {
 	int stateW = glfwGetKey(window, GLFW_KEY_W);
-	if (stateW == (GLFW_PRESS || GLFW_REPEAT || GLFW_RELEASE))
+	if (stateW == (GLFW_PRESS || GLFW_REPEAT))
 	{
 		return 'w';
 	}
 	int stateA = glfwGetKey(window, GLFW_KEY_A);
-	if (stateA == (GLFW_PRESS || GLFW_REPEAT || GLFW_RELEASE))
+	if (stateA == (GLFW_PRESS || GLFW_REPEAT))
 	{
 		return 'a';
 	}
 	int stateS = glfwGetKey(window, GLFW_KEY_S);
-	if (stateS == (GLFW_PRESS || GLFW_REPEAT || GLFW_RELEASE))
+	if (stateS == (GLFW_PRESS || GLFW_REPEAT))
 	{
 		return 's';
 	}
 	int stateD = glfwGetKey(window, GLFW_KEY_D);
-	if (stateD == (GLFW_PRESS || GLFW_REPEAT || GLFW_RELEASE))
+	if (stateD == (GLFW_PRESS || GLFW_REPEAT))
 	{
 		return 'd';
 	}
