@@ -22,7 +22,7 @@ int main(void)
         return -1;
     
     /* Create a windowed mode window and its OpenGL context */
-    window = glfwCreateWindow(1024, 1024, "Welcome to the spaghetti-land", NULL, NULL);
+    window = glfwCreateWindow(1024, 1024, "Scuffed tetris", nullptr, nullptr);
     if (!window)
     {
         glfwTerminate();
@@ -38,8 +38,9 @@ int main(void)
     }
     std::cout << glGetString(GL_VERSION) << std::endl;
     /* Loop until the user closes the window */
-    glOrtho(-130.0, 150.0, -250.0, 250.0, -1.5, 1.5);
-    glScalef(1.2, -1.2, 0);
+    glOrtho(-924 / 2.f, 1024 / 2.f, -1024 / 2.f, 1024 / 2.f, -1, 1);
+    //glOrtho(-130.0, 150.0, -250.0, 250.0, -1.5, 1.5);
+    glScalef(2.5, -2.5, 0);
     while (!glfwWindowShouldClose(window))
     {
         glfwPollEvents();
