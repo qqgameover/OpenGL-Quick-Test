@@ -3,7 +3,32 @@
 #include <iostream>
 #include <thread>
 #include <chrono>
+
 #define WAITTIME 200
+char GetKeyPress(GLFWwindow* window)
+{
+	int stateW = glfwGetKey(window, GLFW_KEY_W);
+	if (stateW == (GLFW_PRESS || GLFW_REPEAT || GLFW_RELEASE))
+	{
+		return 'w';
+	}
+	int stateA = glfwGetKey(window, GLFW_KEY_A);
+	if (stateA == (GLFW_PRESS || GLFW_REPEAT || GLFW_RELEASE))
+	{
+		return 'a';
+	}
+	int stateS = glfwGetKey(window, GLFW_KEY_S);
+	if (stateS == (GLFW_PRESS || GLFW_REPEAT || GLFW_RELEASE))
+	{
+		return 's';
+	}
+	int stateD = glfwGetKey(window, GLFW_KEY_D);
+	if (stateD == (GLFW_PRESS || GLFW_REPEAT || GLFW_RELEASE))
+	{
+		return 'd';
+	}
+	return NULL;
+}
 
 game::game()
 {
@@ -37,7 +62,7 @@ void game::PieceLogic(char movement)
 	}
 }
 
-void game::GameplayLoop(GLFWwindow* window, char movement)
+void game::GameplayLoop(GLFWwindow* window)
 {
 	/* Render here */
 	glClear(GL_COLOR_BUFFER_BIT);
@@ -68,12 +93,14 @@ void game::GameplayLoop(GLFWwindow* window, char movement)
 		}
 		ysize += 10.0;
 	}
-	glFlush();
+	//glFlush();
 	/* Swap front and back buffers */
 	glfwSwapBuffers(window);
 	/* Poll for and process events */
 	//setCursorPosition(0, 0);
-	PieceLogic(movement);
+	glfwPollEvents();
+	char keypressed = GetKeyPress(window);
+	PieceLogic(keypressed);
 	//Board.DrawBoard();
 	std::this_thread::sleep_for(std::chrono::milliseconds(WAITTIME));
 }
