@@ -38,8 +38,8 @@ int main(void)
     }
     std::cout << glGetString(GL_VERSION) << std::endl;
     /* Loop until the user closes the window */
-    glOrtho(-130.0, 150.0, -150.0, 150.0, -1.5, 1.5);
-    glScalef(0.7, -0.7, 0);
+    glOrtho(-130.0, 150.0, -250.0, 250.0, -1.5, 1.5);
+    glScalef(1.2, -1.2, 0);
     while (!glfwWindowShouldClose(window))
     {
         glfwPollEvents();
