@@ -6,22 +6,22 @@
 char GetKeyPress(GLFWwindow* window)
 {
     int stateW = glfwGetKey(window, GLFW_KEY_W);
-    if (stateW == GLFW_PRESS)
+    if (stateW == GLFW_PRESS || stateW == GLFW_REPEAT)
     {
         return 'w';
     }
     int stateA = glfwGetKey(window, GLFW_KEY_A);
-    if (stateA == GLFW_PRESS)
+    if (stateA == (GLFW_PRESS || GLFW_REPEAT))
     {
         return 'a';
     }
     int stateS = glfwGetKey(window, GLFW_KEY_S);
-    if (stateS == GLFW_PRESS)
+    if (stateS == (GLFW_PRESS || GLFW_REPEAT))
     {
         return 's';
     }
     int stateD = glfwGetKey(window, GLFW_KEY_D);
-    if (stateD == GLFW_PRESS)
+    if (stateD == (GLFW_PRESS || GLFW_REPEAT))
     {
         return 'd';
     }
@@ -58,6 +58,7 @@ int main(void)
     while (!glfwWindowShouldClose(window))
     {
         char keypressed = GetKeyPress(window);
+        glfwPollEvents();
         game.GameplayLoop(window, keypressed);
     }
     glfwTerminate();

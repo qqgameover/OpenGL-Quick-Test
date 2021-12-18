@@ -72,7 +72,6 @@ void game::GameplayLoop(GLFWwindow* window, char movement)
 	/* Swap front and back buffers */
 	glfwSwapBuffers(window);
 	/* Poll for and process events */
-	glfwPollEvents();
 	//setCursorPosition(0, 0);
 	PieceLogic(movement);
 	//Board.DrawBoard();
