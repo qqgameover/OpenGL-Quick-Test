@@ -2,14 +2,31 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 #include "game.h"
+
+void DrawGrid(int HALF_GRID_SIZE)
+{
+    glBegin(GL_LINES);
+    glColor3f(0.75f, 0.75f, 0.75f);
+    for (int i = -HALF_GRID_SIZE; i <= HALF_GRID_SIZE; i++)
+    {
+        glVertex3f((float)i, 0, (float)-HALF_GRID_SIZE);
+        glVertex3f((float)i, 0, (float)HALF_GRID_SIZE);
+
+        glVertex3f((float)-HALF_GRID_SIZE, 0, (float)i);
+        glVertex3f((float)HALF_GRID_SIZE, 0, (float)i);
+    }
+    glEnd();
+
+}
+
 int main(void)
 {
     GLFWwindow* window;
-
+    game game;
     /* Initialize the library */
     if (!glfwInit())
         return -1;
-
+    
     /* Create a windowed mode window and its OpenGL context */
     window = glfwCreateWindow(1024, 1024, "Welcome to the spaghetti-land", NULL, NULL);
     if (!window)
@@ -28,24 +45,11 @@ int main(void)
 
     std::cout << glGetString(GL_VERSION) << std::endl;
     /* Loop until the user closes the window */
+    glOrtho(-130.0, 150.0, -90.0, 200.0, -1.5, 1.5);
     while (!glfwWindowShouldClose(window))
     {
-        /* Render here */
-        glClear(GL_COLOR_BUFFER_BIT);
-        glBegin(GL_QUADS);
-        glColor3f(1.0f, 0.0f, 0.0f);
-        glVertex2f(-0.25f, 0.25f); // top left
-        glVertex2f(0.25f, 0.25f); // top right 
-        glVertex2f(0.25f, -0.25f); // bottom right
-        glVertex2f(-0.25f, -0.25f); // bottom left
-        //glOrtho(0.0, 10.0, 0.0, 10.0, -1.0, 1.0);
-        glEnd();
-        /* Swap front and back buffers */
-        glfwSwapBuffers(window);
-        /* Poll for and process events */
-        glfwPollEvents();
+        game.GameplayLoop(window);
     }
-    game game;
     glfwTerminate();
     return 0;
 }

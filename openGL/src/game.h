@@ -4,6 +4,8 @@
 #include "piece.h"
 #include "colDetection.h"
 #include "Controls.h"
+#include <GL/glew.h>
+#include <GLFW/glfw3.h>
 class game
 {
 public:
@@ -13,6 +15,6 @@ public:
     ColDetection ColDetection;
     game();
     void PieceLogic();
-    void GameplayLoop();
+    void GameplayLoop(GLFWwindow* window);
 };
 

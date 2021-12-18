@@ -7,7 +7,6 @@
 
 game::game()
 {
-	GameplayLoop();
 }
 
 void setCursorPosition(int x, int y)
@@ -38,14 +37,36 @@ void game::PieceLogic()
 	}
 }
 
-void game::GameplayLoop()
+void game::GameplayLoop(GLFWwindow* window)
 {
-	set_cursor(false);
-	while (true)
+	/* Render here */
+	glClear(GL_COLOR_BUFFER_BIT);
+	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+	glColor3f(1.0, 0.0, 0.0);
+	int xsize = 0, ysize = 0;
+	for (int j = 0; j < 22; j++)
 	{
-		setCursorPosition(0, 0);
-		PieceLogic();
-		Board.DrawBoard();
-		std::this_thread::sleep_for(std::chrono::milliseconds(WAITTIME));
+
+		xsize = 0;
+		for (int i = 0; i < 12; i++)
+		{
+			glBegin(GL_POLYGON);
+			glVertex3f(-50.0 + xsize, -50.0 + ysize, 0.0);
+			glVertex3f(-40.0 + xsize, -50.0 + ysize, 0.0);
+			glVertex3f(-40.0 + xsize, -40.0 + ysize, 0.0);
+			glVertex3f(-50.0 + xsize, -40.0 + ysize, 0.0);
+			glEnd();
+			xsize += 10.0;
+		}
+		ysize += 10.0;
 	}
+	glFlush();
+	/* Swap front and back buffers */
+	glfwSwapBuffers(window);
+	/* Poll for and process events */
+	glfwPollEvents();
+	//setCursorPosition(0, 0);
+	PieceLogic();
+	//Board.DrawBoard();
+	std::this_thread::sleep_for(std::chrono::milliseconds(WAITTIME));
 }
