@@ -8,22 +8,22 @@
 char GetKeyPress(GLFWwindow* window)
 {
 	int stateW = glfwGetKey(window, GLFW_KEY_W);
-	if (stateW == (GLFW_PRESS || GLFW_REPEAT))
+	if (stateW == (GLFW_PRESS || GLFW_REPEAT || GLFW_RELEASE))
 	{
 		return 'w';
 	}
 	int stateA = glfwGetKey(window, GLFW_KEY_A);
-	if (stateA == (GLFW_PRESS || GLFW_REPEAT))
+	if (stateA == (GLFW_PRESS || GLFW_REPEAT || GLFW_RELEASE))
 	{
 		return 'a';
 	}
 	int stateS = glfwGetKey(window, GLFW_KEY_S);
-	if (stateS == (GLFW_PRESS || GLFW_REPEAT))
+	if (stateS == (GLFW_PRESS || GLFW_REPEAT || GLFW_RELEASE))
 	{
 		return 's';
 	}
 	int stateD = glfwGetKey(window, GLFW_KEY_D);
-	if (stateD == (GLFW_PRESS || GLFW_REPEAT))
+	if (stateD == (GLFW_PRESS || GLFW_REPEAT || GLFW_RELEASE))
 	{
 		return 'd';
 	}
@@ -93,7 +93,6 @@ void game::GameplayLoop(GLFWwindow* window)
 		}
 		ysize += 10.0;
 	}
-	//glFlush();
 	/* Swap front and back buffers */
 	glfwSwapBuffers(window);
 	/* Poll for and process events */
@@ -102,5 +101,6 @@ void game::GameplayLoop(GLFWwindow* window)
 	char keypressed = GetKeyPress(window);
 	PieceLogic(keypressed);
 	//Board.DrawBoard();
+	glFlush();
 	std::this_thread::sleep_for(std::chrono::milliseconds(WAITTIME));
 }
